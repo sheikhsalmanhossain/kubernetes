@@ -7,7 +7,7 @@
 1) ### Kubernetes command execute in "kube api server" via "api".
 2) ### Scheduler: It schedule containers where it should be run from(in which worker node).
 3) ### Every node have an agent. which is called "Kublet".
-4) ### etcd: Its a nosql database, data stay in key value pair. It contains all information of the cluster. (Example: If etcd contain information that 2 container should running. But somehow a container deleted, then scheduler will see that etcd contain 2 ### container information, so scheduler call kube api server to order kubelet create a new container.)
+4) ### etcd: Its a nosql database, data stay in key value pair. It contains all information of the cluster. (Example: If etcd contain information that 2 container should running. But somehow a container deleted, then scheduler will see that etcd contain 2 container information, so scheduler call kube api server to order kubelet create a new container.)
 5) ### Controller manager: To manage all kind of workload in kubernetes. Its the core backend of kubernetes.
 6) ### Kube proxy: It will make connection application component which are running in different worker node.
 7) ### Coredns: Behave like a dns server. coredns make connection between multiple worker node through IP address.
