@@ -1,6 +1,6 @@
 # Setup Kubernetes Cluster On-Premise using kubeadm:
 
-# Prerequisites for Installing a Kubernetes Cluster
+## Prerequisites for Installing a Kubernetes Cluster
 To install Kubernetes Cluster on your Ubuntu machine, make sure it meets the following requirements:
 
 - At list 1 Node (dev)
@@ -8,7 +8,7 @@ To install Kubernetes Cluster on your Ubuntu machine, make sure it meets the fol
 - At least 4GB of RAM
 - At least 20 GB of Disk Space
 - A reliable internet connection
-# Overall configurations steps :
+## Overall configurations steps :
 
 1) Setting up the Static IPV4 on all nodes.
 2) Disabling swap & Setting up hostnames.
@@ -20,18 +20,18 @@ To install Kubernetes Cluster on your Ubuntu machine, make sure it meets the fol
 8) Deploy Applications.
 
 
-# 1)Setting up Static IPV4 on all nodes (Master & Worker Node):
+## 1)Setting up Static IPV4 on all nodes (Master & Worker Node):
 
 Configure Static IP Address on Ubuntu 22.04 (Master & Worker Node)
 first check dhcp ip and interface "ip a"
 
-### Create static ip & network:
+#### Create static ip & network:
 
 - ``` cd /etc/netplan/ ```
 - run "ls" to see network yaml file.
 - edit ``` sudo vim example.yaml ```
 
-## Edit netplan file add and update IP Address as your Network:
+### Edit netplan file add and update IP Address as your Network:
 
 ```
 network:
@@ -48,10 +48,10 @@ network:
       nameservers:
           addresses: [8.8.8.8, 8.8.4.4]
 ```
-## Apply changes:
+#### Apply changes:
 ``` sudo netplan apply ```
 
-# 2) Disabling swap & Setting up hostnames (Master & Worker Node):
+## 2) Disabling swap & Setting up hostnames (Master & Worker Node):
 
 (might not need to disable swap for upcoming versions)
 ```
@@ -63,17 +63,17 @@ sudo init 6
 (init 6 will reboot ubuntu)
 ```
 
-### Setup hostname all nodes (Masternode should be master & worker node should be worker):
+#### Setup hostname all nodes (Masternode should be master & worker node should be worker):
 ``` sudo hostnamectl set-hostname "master-node" ```
 
-### SSH login by outside terminal:
+#### SSH login by outside terminal:
  ``` ssh master@192.168.0.100 ```
 (ssh master/worker@ip)
 
 
-# 3. Installing Kubernetes components on all nodes (Master & Worker Node).
+## 3. Installing Kubernetes components on all nodes (Master & Worker Node).
 
-## 3.1 Configure modules (Master & Worker Node):
+### 3.1 Configure modules (Master & Worker Node):
 
 Configure modules required by containerd (Master & Worker Node).
 Description: Configure kernel modules necessary for containerd to operate seamlessly.
@@ -90,7 +90,7 @@ sudo modprobe br_netfilter
 sudo modprobe overlay
 ```
 
-## 3.2 Configure Networking (Master & Worker Node):
+### 3.2 Configure Networking (Master & Worker Node):
 
 Configure system parameters for networking and CRI (Master & Worker Node).
 Description: Set up system parameters related to networking for Kubernetes and the Container Runtime Interface (CRI).
@@ -104,7 +104,7 @@ EOF
 
 ``` sudo sysctl --system ```
 
-## 3.3 Install containerd (Master & Worker Node) :
+### 3.3 Install containerd (Master & Worker Node) :
 Description: Install the container runtime (containerd) for managing containers.
 ```
 sudo apt-get update
@@ -112,7 +112,7 @@ sudo apt-get install -y containerd
 ```
 
 
-## 3.4 Modify containerd configuration (Master & Worker Node):
+### 3.4 Modify containerd configuration (Master & Worker Node):
 Description: Configure containerd to enable systemd cgroup integration.
 ```
 sudo mkdir -p /etc/containerd
@@ -128,7 +128,7 @@ to restart containerd:
 to check containerd running status:
 ``` sudo systemctl status containerd ```
 
-## 3.5 Install Kubernetes Management Tools (Master & Worker Node):
+### 3.5 Install Kubernetes Management Tools (Master & Worker Node):
 Description: Install using native package management, Install essential Kubernetes management tools - Kubeadm, Kubelet, and Kubectl.
 Reference: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 
@@ -161,7 +161,7 @@ kubectl:
 Its a command line tool. Its a medium to interact with Kubernetes. ]
 
 
-# 4. Initialization the Kubernetes Cluster (Master Node):
+## 4. Initialization the Kubernetes Cluster (Master Node):
 Description: Initialize the Kubernetes control-plane on the master server.
 ```
 sudo kubeadm init --apiserver-advertise-address=192.168.0.100 --pod-network-cidr=10.233.0.0/16 --cri-socket /run/containerd/containerd.sock --ignore-preflight-errors Swap
@@ -173,7 +173,7 @@ sudo kubeadm init --apiserver-advertise-address=192.168.0.100 --pod-network-cidr
 ( pod-network-cidr should be 192.168.0.0/16. But i already fix my master ip in 192 series. so i choose pod network cidr in 10 series. so i have to add this change in next steps: step6 after curl command)
 
 
-# 5. Configuring Kubectl (Master Node):
+## 5. Configuring Kubectl (Master Node):
 Description: This step focuses on creating the kubeconfig file, a crucial configuration file for using the kubectl command on the master node. Create kubeconfig file to use kubectl command
 ```
 mkdir -p $HOME/.kube
@@ -182,7 +182,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 
-# 6. Install Calico networking for on-premises deployments (Master Node):
+## 6. Install Calico networking for on-premises deployments (Master Node):
 
 Reference: https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
 (Use command from reference link, because command will change in future)
@@ -203,18 +203,18 @@ If you wish to customize the Calico install, customize the downloaded custom-res
 ```
 kubectl create -f custom-resources.yaml
 ```
-# 7. Print Join token for worker Node to join Cluster (Master Node):
+## 7. Print Join token for worker Node to join Cluster (Master Node):
 
 Description: Print the join command Master Server and use it to add nodes to the Kubernetes cluster.
 
 ``` kubeadm token create --print-join-command ```
 
-## 7.1 Join worker Node to the Cluster (Worker Node):
+### 7.1 Join worker Node to the Cluster (Worker Node):
 Description: Join Node to the Cluster (Node Configuration)
 
 ``` execute output of kubeadm token create --print-join-command on worker nodes ```
 
-## 7.2 Get Cluster Info (Master Node):
+### 7.2 Get Cluster Info (Master Node):
 Get APi resources list and sort name:
 
 ``` kubectl api-resources ```
