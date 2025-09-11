@@ -4,6 +4,9 @@ In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represe
 ### Create an NGINX Pod via imperative command:
 ``` kubectl run pod-name --image=nginx ```
 
+### Check pod list:
+``` kubectl get pods ```
+
 ### get pod output in "yaml" format and keep inside "abc.yaml" :
 ``` kubectl get pod pod-name -o yaml > abc.yaml ```
 
