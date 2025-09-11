@@ -1,4 +1,29 @@
 # Setup Kubernetes Cluster On-Premise using kubeadm:
+                                          +---------------------------+
+                                          |    External Admin / CI    |
+                                          |     (kubectl, SSH, etc.)   |
+                                          +-------------+-------------+
+                                                        |
+                                                        |
+                                      ------------------v----------------
+                                      |        Master Node (Control Plane)      |
+                                      |  - kubeadm init / certs / etcd           |
+                                      |  - kube-apiserver, controller-manager,    |
+                                      |    scheduler                             |
+                                      |  - Network plugin setup (e.g. CNI)        |
+                                      +------------------+------------------------+
+                                                         |
+        -------------------------------------------------------------------------------
+        |                                 |                                |
+        |                                 |                                |
+        v                                 v                                v
++-------------------+        +-------------------+            +-------------------+
+|  Worker Node 1     |        |  Worker Node 2     |            |  Worker Node 3     |
+| - kubeadm join     |        | - kubeadm join     |            | - kubeadm join     |
+| - kubelet, kube-proxy |     | - kubelet, kube-proxy |          | - kubelet, kube-proxy |
+| - Pods / workloads  |        | - Pods / workloads  |          | - Pods / workloads  |
++-------------------+        +-------------------+            +-------------------+
+
 
 ## Prerequisites for Installing a Kubernetes Cluster
 To install Kubernetes Cluster on your Ubuntu machine, make sure it meets the following requirements:
