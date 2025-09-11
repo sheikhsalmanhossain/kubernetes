@@ -1,9 +1,9 @@
 ## General Node Management
- ### List all nodes in the cluster:#
+ ### List all nodes in the cluster:
 
 ``` kubectl get nodes ```
 
-### Get detailed information about a specific node:#
+### Get detailed information about a specific node:
 
 ``` kubectl describe node <node-name> ```
 
@@ -15,7 +15,7 @@
 
 ``` kubectl get node <node-name> -o wide ```
 
-### View resources and statuses of all nodes:#
+### View resources and statuses of all nodes:
 
 ``` kubectl get nodes -o wide ```
 
