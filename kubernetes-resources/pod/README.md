@@ -45,7 +45,7 @@ In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represe
 
 # Creating a pod:
 
-## ``` kubectl run pod-name --image=nginx ``` Convert this command in ``` yaml ``` format :
+## "kubectl run pod-name --image=nginx" Convert this command in "yaml" format :
 
 ```
 apiVersion: v1
