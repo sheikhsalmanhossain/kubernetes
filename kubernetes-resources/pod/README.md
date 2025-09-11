@@ -1,4 +1,4 @@
-## What is Pod
+# What is Pod
 In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represents a single instance of a running process in your cluster. A Pod can contain one or more containers, which are tightly coupled and share resources such as networking and storage.
 
 ### Create an NGINX Pod via imperative command:
