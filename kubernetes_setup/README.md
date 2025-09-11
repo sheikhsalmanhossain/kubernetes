@@ -253,3 +253,6 @@ Display addresses of the master and services:
 Dump current cluster state to stdout (To further debug and diagnose cluster problems):
 
 ``` kubectl cluster-info dump ```
+
+
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/7391c98d4748b5da718c71587033270211b60b39/kubernetes_setup/kubernetes-setup.jpg)
