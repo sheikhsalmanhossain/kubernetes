@@ -2,12 +2,23 @@
 In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represents a single instance of a running process in your cluster. A Pod can contain one or more containers, which are tightly coupled and share resources such as networking and storage.
 
 ### Create an NGINX Pod via imperative command:
-``` kubectl run nginx --image=nginx ```
+``` kubectl run pod-name --image=nginx ```
+
+### get pod output in "yaml" format and keep inside "abc.yaml" :
+``` kubectl get pod pod-name -o yaml > abc.yaml ```
+
+### details about pods :
+``` kubectl get pod -o wide ```
+
+### describe about pod details :
+``` kubectl describe pod pod-name ```
 
 ### Create an NGINX Pod with manifest file
-``` kubectl apply -f 0-pod.yaml ```
+``` kubectl apply -f abc.yaml ```
 
 ### Dry run: Print the corresponding API objects without creating them:
+(dry run means it will not create pod actually, it just shows it works(test purpose only))
+
 ``` kubectl run nginx --image=nginx --dry-run=client ```
 
 ### Generate POD Manifest YAML file (-o yaml) with (–dry-run):
@@ -27,3 +38,24 @@ In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represe
 
 ### delete pod:
 ``` kubectl delete pod podname ```
+
+
+
+
+
+# Creating a pod:
+
+## ``` kubectl run pod-name --image=nginx ``` Convert this command in ``` yaml ``` format :
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-name
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+       - containerPort: 80
+```
