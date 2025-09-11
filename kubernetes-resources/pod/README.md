@@ -41,6 +41,7 @@ In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represe
 
 ### Port forward:
 (after creating a pod, if i want to see my dockerImage which is running inside pod & its output)
+
 ``` kubectl port-forward pods/pod-name 8080:80 ```
 
 ### delete pod:
