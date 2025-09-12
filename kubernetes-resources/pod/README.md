@@ -41,6 +41,7 @@ In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represe
 
 ### Port forward:
 (after creating a pod, if i want to run in local host & its output)
+
 ``` kubectl port-forward pods/pod-name 8080:80 ```
 
 ### Watch live Pod logs:
