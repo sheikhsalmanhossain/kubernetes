@@ -1,5 +1,7 @@
 # Kubernetes Deployment:
-Kubernetes Deployment is a resource object in Kubernetes that provides a declarative way to manage Pods and ReplicaSets. It’s one of the most commonly used controllers in Kubernetes because it allows you to define what you want your application to look like, and Kubernetes makes sure the cluster matches that desired state.
+Kubernetes Deployment is a resource object in Kubernetes that provides a declarative way to manage Pods and ReplicaSets.
+It’s one of the most commonly used controllers in Kubernetes because it allows you to define what you want your application to look like,
+and Kubernetes makes sure the cluster matches that desired state.
 
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/5714367e30d21f81e3eea1e6169472ed6b8c2caa/kubernetes-resources/deployment/Deployment.jpg)
 
