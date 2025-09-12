@@ -7,9 +7,10 @@ and Kubernetes makes sure the cluster matches that desired state.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Deployment scaling:
 ## Deployment scaling in Kubernetes means increasing or decreasing the number of Pods that a Deployment manages.
 
-## 🔹 Why Scaling?
+##  Why Scaling?
 
 - To handle more traffic (scale up).
 
@@ -17,7 +18,7 @@ and Kubernetes makes sure the cluster matches that desired state.
 
 - To maintain high availability.
 
-## 🔹 How Scaling Works
+##  How Scaling Works
 
 - When you scale a Deployment, Kubernetes adjusts the ReplicaSet associated with it.
 
