@@ -48,6 +48,17 @@ Think of it like separate "virtual clusters" inside the same physical Kubernetes
 
 ``` kubectl create namespace namespace-name --dry-run=client -o yaml ```
 
+## Namespace yaml:
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+  labels:
+    environment: dev
+    team: backend
+```
+
 ## Apply this yaml file:
 ``` kubectl apply -f abc.yaml ```
 
