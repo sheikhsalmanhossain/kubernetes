@@ -97,7 +97,9 @@ spec:
 ## Delete deployment :
 ``` kubectl delete -f nginx-deployment.yaml ```
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Create deployment yaml file using command :
 
 ## Create a deployment.yaml file by command with dry run(where yaml wil not create directly)"
