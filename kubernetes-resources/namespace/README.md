@@ -30,7 +30,7 @@ Think of it like separate "virtual clusters" inside the same physical Kubernetes
 ``` kubectl create namespace namespace-name ```
 
 ## Namespace list:
-`` kubectl get namespace ```
+``` kubectl get namespace ```
 
 ## Create a deployment inside a namespace:
 
