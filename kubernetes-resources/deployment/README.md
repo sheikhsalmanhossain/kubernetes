@@ -102,7 +102,7 @@ spec:
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Create deployment yaml file using command :
 
-## Create a deployment.yaml file by command with dry run(where yaml wil not create directly)"
+## Create a deployment.yaml file by command with dry run(where yaml wil not create directly):
 ``` kubectl create deployment deployment-name --image image-name --replicas 3 --dry-run=client ```
 
 ## Create a deployment.yaml file by command with dry run(where yaml wil not create directly) & get output yaml format(generate the Deployment manifest):
