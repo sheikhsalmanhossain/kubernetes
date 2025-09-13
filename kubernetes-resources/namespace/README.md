@@ -8,7 +8,7 @@ Think of it like separate "virtual clusters" inside the same physical Kubernetes
 
 ## Key Points about Namespaces:
 
-### Isolation:
+### Network Isolation:
 
  They provide a way to separate resources (pods, services, deployments, etc.) into groups. For example, you can have a dev, staging, and production namespace within the same cluster.
 
