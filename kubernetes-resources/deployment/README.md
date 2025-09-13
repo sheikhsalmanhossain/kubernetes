@@ -57,7 +57,7 @@ and Kubernetes makes sure the cluster matches that desired state.
 ``` kubectl scale deployment deployment-name --replicas 10 ```
 
 ## Show pod logs :
-`` kubectl logs pod-name ```
+``` kubectl logs pod-name ```
 ## Show deployment logs (all pods):
 ``` kubectl logs deployments/deployment-name -f ```
 
