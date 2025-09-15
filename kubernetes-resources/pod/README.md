@@ -1,3 +1,6 @@
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/10e45653922ed8b3cc65d243031d7707f2347b2b/kubernetes-resources/pod/pod.jpg)
+
+
 # What is Pod
 In Kubernetes, a Pod is the smallest and simplest unit of deployment. It represents a single instance of a running process in your cluster. A Pod can contain one or more containers, which are tightly coupled and share resources such as networking and storage.
 
