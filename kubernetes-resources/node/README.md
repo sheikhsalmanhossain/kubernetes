@@ -1,3 +1,5 @@
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/fb574f24670ca1b8e772fc50885eb4cb92eeb571/kubernetes-resources/node/node.jpg)
+
 ## General Node Management
  ### List all nodes in the cluster:
 
