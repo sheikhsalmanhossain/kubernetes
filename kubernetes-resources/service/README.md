@@ -61,8 +61,8 @@ or
 
 NOW WE CAN CONNECT FROM POD2 TO POD1 USING POD1 PRIVATE IP
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## But if i restart or replace with new pod then how this pod can be find out ?
-That's why we need " Cluster IP Service "
+### But if i restart or replace with new pod & IP will change. Then how this pod can be find out ?
+### That's why we need " Cluster IP Service "
 
 ## Cluster IP Service :
 
