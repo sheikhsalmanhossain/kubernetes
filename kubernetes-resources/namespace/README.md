@@ -1,6 +1,6 @@
 # Namespace:
 
- ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/57fe628a22d7fda76e05ead6f7c6e0b4c6a666a2/kubernetes-resources/namespace/namespace1.jpg)
+ ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/ad2e8ee00cca1d57a630b747e99c7e192a2f9bc1/kubernetes-resources/namespace/namespace1.jpg)
 
 In Kubernetes, a namespace is a way to logically divide and organize cluster resources.
 
