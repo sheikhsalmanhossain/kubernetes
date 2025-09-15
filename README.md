@@ -4,4 +4,4 @@ In this repository, i described about kubernetes Architecture, Creating Cluster 
 
 
 # Kubernetes Cluster :
-![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/ad2e8ee00cca1d57a630b747e99c7e192a2f9bc1/kubernetes-resources/namespace/namespace1.jpg)
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/d677e662495938e032374984cdd32f3916286876/cluster.jpg)
