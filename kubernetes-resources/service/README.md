@@ -277,3 +277,48 @@ Now we see that, we have to browse "ip:port" to get in application from outside 
 # 3) Load Balancer Service :
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/817dc2738ad44eacade63fcf5212a04a3c058102/kubernetes-resources/service/LoadBalancer%20Service.jpg)
 
+
+## That Load Balancer forwards external traffic → NodePort → ClusterIP → Pods.
+
+A LoadBalancer Service exposes application to the outside world through a cloud provider’s load balancer.
+
+## When you create a Service of type LoadBalancer, Kubernetes does these things:
+
+### 1) Creates a ClusterIP Service (internal load balancer) :
+
+- First, it creates a ClusterIP inside the cluster.
+
+- This ClusterIP load balances traffic across your Pods (using kube-proxy rules).
+
+### 2) Creates a NodePort Service (external entry point on each Node) :
+
+ - Internally, Kubernetes also allocates a NodePort (a port on every Node).
+
+- So the Service is accessible via any Node’s IP + NodePort.
+
+### 3) Integrates with Cloud Provider Load Balancer :
+
+- If running in a cloud , Kubernetes asks the cloud provider to provision a real Load Balancer.
+
+- That Load Balancer forwards external traffic → NodePort → ClusterIP → Pods.
+
+### 4) External Access :
+
+- The cloud provider gives you an external IP (public or private).
+
+- Anyone can access your Service using that IP/DNS.
+
+- The traffic is distributed across all healthy backend Pods.
+
+
+
+
+
+[
+ - Works only if your Kubernetes cluster is running on a cloud provider that supports load balancers.
+
+- On bare-metal clusters, you don’t automatically get a real Load Balancer — you need solutions like MetalLB.
+
+- LoadBalancer is useful for exposing production services (web apps, APIs) to the internet with auto-scaling and health checks.
+
+]
