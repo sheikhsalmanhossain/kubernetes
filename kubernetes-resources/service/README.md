@@ -211,6 +211,8 @@ The purose of nodePort is expose port inside node and creating cluster IP for ap
 NodePort Service reach app through lebels. When we expose a application on nodeport, then nodeport will create port(same port number) in every node (master and worker).
 
 If someone hit on master node ip with master node port (example 10.173.179.70:30000). Then port(30000) will forward this to "NodePort Service". Similarly, If someone hit on worker node ip with worker node port (example 10.174.179.71:30000). Then port(30000) will forward this to "NodePort Service".
+
+
 (NodePort Range: 30000-32767).
 
 ## Creating NodePort Service :
