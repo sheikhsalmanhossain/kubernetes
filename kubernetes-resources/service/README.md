@@ -327,8 +327,11 @@ A LoadBalancer Service exposes application to the outside world through a cloud 
 
 ## Creating Load Balancer Service :
 
-### Write a file:
+### setup yaml file name :
+
 ``` sudo touch loadbalancer.yaml ```
+
+### Write inside yaml file :
 ``` sudo vim loadbalancer.yaml ```
 
 
