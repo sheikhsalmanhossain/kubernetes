@@ -379,3 +379,8 @@ spec:
 Now we can see our loadBalancer Service externalIP is pending. 
 So we have to bring a controller/manager who decide this ip address.
 SO we have to setup METALLB here.....
+(Follow "metallb-setup" folder)
+
+After setup METALLB, We see our loadBalancer Service externalIP is now available.
+
+(In loadbalancer.yaml file if we change our port 80 to 8080 then we have to browse this port with externalIP. example: 192.168.0.110:8080)
