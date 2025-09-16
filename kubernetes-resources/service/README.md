@@ -202,7 +202,7 @@ spec:
 
 
 If we want to browse our application outside cluster, then we need to use NodePort.
-## Purpose Of NodePrt:
+## Purpose Of NodePort:
 The purose of nodePort is expose port inside node and creating cluster IP for application.
 
 ## How NodePort Works :
