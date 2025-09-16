@@ -199,3 +199,78 @@ spec:
 
 # 2) Node Port Service :
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/cfcea8848d766f006ca99be979f69aba0dd004aa/kubernetes-resources/service/NodePort%20Service.jpg)
+
+
+If we want to browse our application outside cluster, then we need to use NodePort.
+## Purpose Of NodePrt:
+The purose of nodePort is expose port inside node and creating cluster IP for application.
+
+## How NodePort Works :
+
+
+NodePort Service reach app through lebels. When we expose a application on nodeport, then nodeport will create port(same port number) in every node (master and worker).
+
+If someone hit on master node ip with master node port (example 10.173.179.70:30000). Then port(30000) will forward this to "NodePort Service". Similarly, If someone hit on worker node ip with worker node port (example 10.174.179.71:30000). Then port(30000) will forward this to "NodePort Service".
+(NodePort Range: 30000-32767).
+
+## Creating NodePort Service :
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test
+  labels:
+    name: test
+spec:
+  containers:
+  - name: test
+    image: nginx
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort
+  selector:
+    name: test          #### ("selector" and "levels" name should be same to introduce service about pod)
+  ports:
+    - port: 80           ### (does not matter on nodeport. Because It works for cluster IP, if we need specific cluster ip then its important.
+                          ### Example: if port 8080 then we have to curl ip:8080 to get hit)
+      targetPort: 80      ##(container port)
+      nodePort: 30000     #### (if we do not define node port, it will choose randomly & change after restart)
+
+```
+
+### Apply this yaml file:
+``` kubectl apply -f filename.yaml ```
+
+### Watch pod, service, node :
+``` kubectl get pod,service,node -o wide ```
+
+
+### TO check in browser:
+1) Take any node IP (example: 192.168.0.101)
+2) From Service check "NodePort service" and copy outside port (example: 30000)
+3) Now browse it from any browser. (example : 192.168.0.101:30000)
+
+### If get any error & need to debug :
+``` kubectl describe service service-name ```
+( Here we use nodeport service name )
+
+
+When we apply yaml file, nodePort service will create a cluster ip. Cluster ip will catch application. Cluster Ip contain a name. Other application can reach this application by this name (ClustrtIP Service). (If we create nodePort cluster ip automatically crate inside to make connection between application).
+
+ 
+
+Now we see that, we have to browse "ip:port" to get in application from outside world. Its not a good solution. So wee need load balancer to solve this problem.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 3) Load Balancer :
+
