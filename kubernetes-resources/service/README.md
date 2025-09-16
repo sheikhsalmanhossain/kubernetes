@@ -322,3 +322,57 @@ A LoadBalancer Service exposes application to the outside world through a cloud 
 - LoadBalancer is useful for exposing production services (web apps, APIs) to the internet with auto-scaling and health checks.
 
 ]
+
+
+
+## Creating Load Balancer Service :
+
+### Write a file:
+``` sudo touch loadbalancer.yaml ```
+``` sudo vim loadbalancer.yaml ```
+
+
+```
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+  - port: 80
+    targetPort: 80
+
+```
+
+### Apply yaml file:
+``` kubectl apply -f filename.yaml ```
+
+### Watch service and pods:
+
+``` kubectl get service,pod -o wide ```
+
+Now we can see our loadBalancer Service externalIP is pending. 
+So we have to bring a controller/manager who decide this ip address.
+SO we have to setup METALLB here.....
