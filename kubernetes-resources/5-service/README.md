@@ -275,7 +275,7 @@ Now we see that, we have to browse "ip:port" to get in application from outside 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 3) Load Balancer Service :
-![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/817dc2738ad44eacade63fcf5212a04a3c058102/kubernetes-resources/service/LoadBalancer%20Service.jpg)
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/e1350729ee42977745357bb13805b3e60d940b9b/kubernetes-resources/5-service/LoadBalancer%20Service1.jpg)
 
 
 ## That Load Balancer forwards external traffic → NodePort → ClusterIP → Pods.
