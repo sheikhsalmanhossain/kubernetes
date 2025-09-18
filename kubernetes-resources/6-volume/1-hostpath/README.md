@@ -78,6 +78,40 @@ spec:
           name: task-pv-storage      #### name should be same as volumes name
 ```
 
+## Or,
+
+### Deployment:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-server
+  labels:
+    app: my-web-server
+spec:
+  selector:
+    matchLabels:
+      app: my-web-server
+  template:
+    metadata:
+      labels:
+        app: my-web-server
+    spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+        - name: web-server
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: "http-server"
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: task-pv-storage
+```
+
 ### (Pvc will automatically find pv, hence they inside same node)
 
 ### Apply yaml file:
