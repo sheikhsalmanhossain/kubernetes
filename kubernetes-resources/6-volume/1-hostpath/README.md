@@ -94,7 +94,8 @@ spec:
 ### Go inside node mount path:
 
 ``` cd /mnt/data ```
-----
+
+-------------------------------------------------------------------------------------------------------
 ### Use another terminal to go inside pod:
 ``` kubectl exec -it pod-name -- bash ```
 
