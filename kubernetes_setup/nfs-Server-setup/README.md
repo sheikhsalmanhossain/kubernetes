@@ -41,6 +41,8 @@ sudo systemctl status nfs-kernel-server
 
 ``` sudo apt install nfs-common -y ```
 
+(Run this command all mster and worker node)
+
 ## Step 2: Install and Configure NFS Client Provisioner
 
 NFS subdir external provisioner References: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
