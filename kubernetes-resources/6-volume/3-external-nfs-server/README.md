@@ -2,12 +2,12 @@
 - Used in production
 - Data persist
 - External env/server
-[image]
+  ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/1526444faac27e046b253a13735aede9b84f9510/kubernetes-resources/6-volume/3-external-nfs-server/nfs%20server%20setup.jpg)
 Inside application there is a path which always sync with external storage. If application dies external storage volume will stay. Or even Kubernetes cluster dies our data will untouched. Then we create a new cluster and sync data like before. This is a good way to save data from disaster.
 
 ### [SETUP "nfs-server" FROM "kubernetes_setup/nfs-Server-setup"]
 
-image 2
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/1526444faac27e046b253a13735aede9b84f9510/kubernetes-resources/6-volume/3-external-nfs-server/nfs%20server%20setup1.jpg)
 
 Now added a controller/manager using helm.
 Now if any pod want to access external storage. pod call controller/manager. Controller/manager make a connection between pod and external storage. Then pods data stored in external storage 
