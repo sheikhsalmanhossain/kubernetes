@@ -1,1 +1,258 @@
+# Setup Kubernetes Cluster On-Premise using kubeadm:
+```
+                                          +---------------------------+
+                                          |    External Admin / CI    |
+                                          |     (kubectl, SSH, etc.)   |
+                                          +-------------+-------------+
+                                                        |
+                                                        |
+                                      ------------------v----------------
+                                      |        Master Node (Control Plane)      |
+                                      |  - kubeadm init / certs / etcd           |
+                                      |  - kube-apiserver, controller-manager,    |
+                                      |    scheduler                             |
+                                      |  - Network plugin setup (e.g. CNI)        |
+                                      +------------------+------------------------+
+                                                         |
+        -------------------------------------------------------------------------------
+        |                                 |                                |
+        |                                 |                                |
+        v                                 v                                v
++-------------------+        +-------------------+            +-------------------+
+|  Worker Node 1     |        |  Worker Node 2     |            |  Worker Node 3     |
+| - kubeadm join     |        | - kubeadm join     |            | - kubeadm join     |
+| - kubelet, kube-proxy |     | - kubelet, kube-proxy |          | - kubelet, kube-proxy |
+| - Pods / workloads  |        | - Pods / workloads  |          | - Pods / workloads  |
++-------------------+        +-------------------+            +-------------------+
 
+```
+
+## Prerequisites for Installing a Kubernetes Cluster
+To install Kubernetes Cluster on your Ubuntu machine, make sure it meets the following requirements:
+
+- At list 1 Node (dev)
+- 2 vCPUs
+- At least 4GB of RAM
+- At least 20 GB of Disk Space
+- A reliable internet connection
+## Overall configurations steps :
+
+1) Setting up the Static IPV4 on all nodes.
+2) Disabling swap & Setting up hostnames.
+3) Installing Kubernetes components on all nodes.
+4) Initializing the Kubernetes cluster.
+5) Configuring Kubectl.
+6) Configure Calico Network operator.
+7) Print Join token & add worker nodes in the cluster.
+8) Deploy Applications.
+
+
+## 1)Setting up Static IPV4 on all nodes (Master & Worker Node):
+
+Configure Static IP Address on Ubuntu 22.04 (Master & Worker Node)
+first check dhcp ip and interface "ip a"
+
+#### Create static ip & network:
+
+- ``` cd /etc/netplan/ ```
+- run "ls" to see network yaml file.
+- edit ``` sudo vim example.yaml ```
+
+### Edit netplan file add and update IP Address as your Network:
+
+```
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses:
+        - 192.168.0.100/24
+      routes:
+        - to: default
+          via: 192.168.0.1
+      nameservers:
+          addresses: [8.8.8.8, 8.8.4.4]
+```
+#### Apply changes:
+``` sudo netplan apply ```
+
+## 2) Disabling swap & Setting up hostnames (Master & Worker Node):
+
+(might not need to disable swap for upcoming versions)
+```
+sudo apt-get update
+sudo swapoff -a
+sudo vim /etc/fstab
+( before "swap.img" add "#" to comment out this line and save it)
+sudo init 6
+(init 6 will reboot ubuntu)
+```
+
+#### Setup hostname all nodes (Masternode should be master & worker node should be worker):
+``` sudo hostnamectl set-hostname "master-node" ```
+
+#### SSH login by outside terminal:
+ ``` ssh master@192.168.0.100 ```
+(ssh master/worker@ip)
+
+
+## 3. Installing Kubernetes components on all nodes (Master & Worker Node).
+
+### 3.1 Configure modules (Master & Worker Node):
+
+Configure modules required by containerd (Master & Worker Node).
+Description: Configure kernel modules necessary for containerd to operate seamlessly.
+```
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+```
+
+
+```
+sudo modprobe br_netfilter
+sudo modprobe overlay
+```
+
+### 3.2 Configure Networking (Master & Worker Node):
+
+Configure system parameters for networking and CRI (Master & Worker Node).
+Description: Set up system parameters related to networking for Kubernetes and the Container Runtime Interface (CRI).
+```
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+```
+
+``` sudo sysctl --system ```
+
+### 3.3 Install containerd (Master & Worker Node) :
+Description: Install the container runtime (containerd) for managing containers.
+```
+sudo apt-get update
+sudo apt-get install -y containerd
+```
+
+
+### 3.4 Modify containerd configuration (Master & Worker Node):
+Description: Configure containerd to enable systemd cgroup integration.
+```
+sudo mkdir -p /etc/containerd
+sudo containerd config default | sudo tee /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+cat /etc/containerd/config.toml
+```
+
+to restart containerd:
+ ```sudo systemctl restart containerd.service ```
+
+
+to check containerd running status:
+``` sudo systemctl status containerd ```
+
+### 3.5 Install Kubernetes Management Tools (Master & Worker Node):
+Description: Install using native package management, Install essential Kubernetes management tools - Kubeadm, Kubelet, and Kubectl.
+Reference: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
+
+```
+sudo apt-get update
+# apt-transport-https may be a dummy package; if so, you can skip that package
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
+
+
+# If the folder `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
+# sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
+
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list   # helps tools such as command-not-found to work correctly
+```
+```
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+```
+
+[ kublet:
+ work as a service in master & worker node.
+kubeadm:
+ it runs services like (kube api server, kube controller, coredns) run inside master node as a container. Example: etcd container. And this container managed by containered.
+kubectl:
+Its a command line tool. Its a medium to interact with Kubernetes. ]
+
+
+## 4. Initialization the Kubernetes Cluster (Master Node):
+Description: Initialize the Kubernetes control-plane on the master server.
+```
+sudo kubeadm init --apiserver-advertise-address=192.168.0.100 --pod-network-cidr=10.233.0.0/16 --cri-socket /run/containerd/containerd.sock --ignore-preflight-errors Swap
+```
+
+- 192.168.0.100 this is your k8s Master Server IP
+- 10.233.0.0/16 this is Pod CIDR if you change this you have to udpate CNI Network Configuration operator file also.
+
+( pod-network-cidr should be 192.168.0.0/16. But i already fix my master ip in 192 series. so i choose pod network cidr in 10 series. so i have to add this change in next steps: step6 after curl command)
+
+
+## 5. Configuring Kubectl (Master Node):
+Description: This step focuses on creating the kubeconfig file, a crucial configuration file for using the kubectl command on the master node. Create kubeconfig file to use kubectl command
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+
+## 6. Install Calico networking for on-premises deployments (Master Node):
+
+Reference: https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
+(Use command from reference link, because command will change in future)
+
+Description: In this step, we'll install Calico, a powerful networking solution, to facilitate on-premises deployments in your Kubernetes cluster.
+
+Install the operator on your cluster:
+```
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/operator-crds.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/tigera-operator.yaml
+```
+Download the custom resources necessary to configure Calico:
+ ```curl https://raw.githubusercontent.com/projectcalico/calico/v3.30.3/manifests/custom-resources.yaml -O ```
+
+[ENTER INSIDE THIS FILE AND CHANGE THE IP FROM pod-network-cidr (10.233.0.0/16)]
+
+If you wish to customize the Calico install, customize the downloaded custom-resources.yaml manifest locally and Create the manifest in order to install Calico. 
+```
+kubectl create -f custom-resources.yaml
+```
+## 7. Print Join token for worker Node to join Cluster (Master Node):
+
+Description: Print the join command Master Server and use it to add nodes to the Kubernetes cluster.
+
+``` kubeadm token create --print-join-command ```
+
+### 7.1 Join worker Node to the Cluster (Worker Node):
+Description: Join Node to the Cluster (Node Configuration)
+
+``` execute output of kubeadm token create --print-join-command on worker nodes ```
+
+### 7.2 Get Cluster Info (Master Node):
+Get APi resources list and sort name:
+
+``` kubectl api-resources ```
+
+Display addresses of the master and services:
+
+``` kubectl cluster-info ```
+
+Dump current cluster state to stdout (To further debug and diagnose cluster problems):
+
+``` kubectl cluster-info dump ```
+
+
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/7391c98d4748b5da718c71587033270211b60b39/kubernetes_setup/kubernetes-setup.jpg)
