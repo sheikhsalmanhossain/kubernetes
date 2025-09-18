@@ -1,12 +1,12 @@
 # HostPath Volume
-[image1]
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/650d83408ed4310c0c50dced0350f9a3725f6807/kubernetes-resources/6-volume/1-hostpath/hostpath%20volume.jpg)
 In time running of an application inside pod, it will allocate a directory inside server(pod). Where application is running and store files. This directory will mount another directory which is outside our application server(pod) and copying files there.So If pod dies volume will not lost.
 
 ### Edit a node:
 ``` kubectl edit node node-name ```
 
 ## Creating HostPath:
-[image2]
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/650d83408ed4310c0c50dced0350f9a3725f6807/kubernetes-resources/6-volume/1-hostpath/hostpath%20volume1.jpg)
 
 From pod data will go to pv through pvc. Then pv store data in "/mnt/data".
 
