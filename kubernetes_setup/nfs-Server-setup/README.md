@@ -26,7 +26,7 @@ sudo chmod 2770 /var/k8-nfs/data
 
 ```
 sudo vi /etc/exports	
-/var/k8-nfs/data 172.17.17.0/24(rw,sync,no_subtree_check,no_root_squash,no_all_squash)
+/var/k8-nfs/data 192.168.0.1/24(rw,sync,no_subtree_check,no_root_squash,no_all_squash)
 ```
 
 ### Makes the specified directories available for NFS clients to access and restart the NFS Service :
