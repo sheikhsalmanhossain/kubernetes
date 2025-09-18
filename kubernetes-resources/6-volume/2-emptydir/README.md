@@ -1,7 +1,7 @@
 # Emptydir :
 
 (This used in production)
-[image]
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/ef0008813a330bdc2c67550e4bbd6c06528ee20d/kubernetes-resources/6-volume/2-emptydir/emptydir.jpg)
 
 Inside pod, container will mount volume with external volume. But the External volume is ephemeral. If pod get deleted, external volume will be deleted too.
 
@@ -97,7 +97,7 @@ Now we login inside 2 container in different tab and go mount path " cd /demo1 "
 Now if we write file inside a container we get same data inside another one. So they shares same volume outside container.
 
 ## Use case of this directory :
-[Image]
+![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/ef0008813a330bdc2c67550e4bbd6c06528ee20d/kubernetes-resources/6-volume/2-emptydir/emptydir1.jpg)
 
 Hence "second container" get same log data, so we can add an exporter as a side car here and send this log data to "external service" where log data stored permanently.
 Thats how emptydir volume works.
