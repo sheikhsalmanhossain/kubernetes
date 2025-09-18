@@ -92,6 +92,7 @@ spec:
 ``` ssh master@192.168.0.100 ```
 
 ### Go inside node mount path:
+
 ``` cd /mnt/data ```
 ----
 ### Use another terminal to go inside pod:
