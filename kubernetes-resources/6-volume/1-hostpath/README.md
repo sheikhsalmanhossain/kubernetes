@@ -142,4 +142,4 @@ You will see file in "/mnt/data" using ls command.
 That means our data copying from pod to node. So if our pod will die and create new one, our data will not lost.
 Data will be persistent.
 
-
+This is use in development purpose, not production.
