@@ -144,3 +144,7 @@ That means our data copying from pod to node. So if our pod will die and create 
 Data will be persistent.
 
 This is use in development purpose, not production.
+
+### Remove pod.yaml file :
+
+``` rm pod.yaml ```    ( ``` kubectl delete pod pod-name ``` or ``` kubectl delete pod pod.yaml ``` only delete the running pod, not the pod.yaml file)
