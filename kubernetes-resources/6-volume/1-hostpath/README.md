@@ -122,9 +122,9 @@ spec:
 
 [ If pod runs , everything works fine]
 
-### Go inside master node:
-``` ssh master@192.168.0.100 ```
-
+### Go inside worker node:
+``` ssh worker@192.168.0.101 ```
+(because we ran our command from master node, but resource will create in worker node. master node only contain environment)
 ### Go inside node mount path:
 
 ``` cd /mnt/data ```
