@@ -51,7 +51,7 @@ That means data deleted. After deleted pod, data deleted automatically. So  data
 
 
 ```
-#### a pod with multiple container share same volume
+#### a pod with multiple container share same volume outside pod
 apiVersion: v1
 kind: Pod
 metadata:
