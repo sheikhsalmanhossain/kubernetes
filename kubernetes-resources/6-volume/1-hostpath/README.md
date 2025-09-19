@@ -124,6 +124,7 @@ spec:
 
 ### Go inside worker node:
 ``` ssh worker@192.168.0.101 ```
+
 (because we ran our command from master node, but resource will create in worker node. master node only contain environment)
 ### Go inside node mount path:
 
