@@ -48,6 +48,7 @@ create some file using "touch" and check by "ls"
 go to " cd /cache/ " and run "ls",
 you will see nothing there.
 That means data deleted. After deleted pod, data deleted automatically. So  data is not persistent.
+
 --------------------------------------------------------------------------------------------------------------
 
 ```
