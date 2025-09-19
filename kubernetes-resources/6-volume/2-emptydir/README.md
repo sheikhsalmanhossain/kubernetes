@@ -91,11 +91,11 @@ we can see that, inside a pod have 2 container. now we have to mount these 2 con
 Hence i have 2 container inside a pod. Then how we can access a specific pod?
 ### Go inside random container :
 
-``` kubectl exec -it pod-name --sh ```
+``` kubectl exec -it pod-name -- sh ```
 
 ### Go inside specific container :
 
-``` kubectl exec -it pod-name -c container-name --sh ```
+``` kubectl exec -it pod-name -c container-name -- sh ```
 
 Now we login inside 2 container in different tab and go mount path " cd /demo1 " " cd /demo2 " for first and second container.
 Now if we write file inside a container we get same data inside another one. So they shares same volume outside container.
