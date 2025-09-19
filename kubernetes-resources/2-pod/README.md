@@ -74,3 +74,8 @@ spec:
       ports:
        - containerPort: 80
 ```
+
+
+### Remove pod.yaml file :
+
+``` rm pod.yaml ```  to remove pod.yaml file.  ( ``` kubectl delete pod pod-name ``` or ``` kubectl delete pod pod.yaml ``` only delete the running pod, not the pod.yaml file)
