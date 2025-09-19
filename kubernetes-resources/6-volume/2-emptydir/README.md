@@ -1,6 +1,6 @@
 # Emptydir :
 
-(This used in production)
+(This volume type used in production)
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/ef0008813a330bdc2c67550e4bbd6c06528ee20d/kubernetes-resources/6-volume/2-emptydir/emptydir.jpg)
 
 Inside pod, container will mount volume with external volume. But the External volume is ephemeral. If pod get deleted, external volume will be deleted too.
