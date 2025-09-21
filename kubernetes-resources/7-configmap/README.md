@@ -10,6 +10,17 @@ It allows you to decouple configuration from your application container images, 
 configmap is a namespace specific resource.
 
 
+## Configmap:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: name-config
+  namespace: default    #### if i do not declare it will choose default one
+data:
+  name: "test-name-111"
+```
 
 ## Deployment:
 ```
@@ -37,17 +48,6 @@ spec:
             configMapKeyRef:
               name: name-config    #### same as configmap name
               key: name            #### from configmap data
-```
-## Configmap:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: name-config
-  namespace: default    #### if i do not declare it will choose default one
-data:
-  name: "test-name-111"
 ```
 
 ### Apply yaml file:
