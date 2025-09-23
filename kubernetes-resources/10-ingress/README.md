@@ -26,7 +26,10 @@ helm repo update
 
 #### Install Chart :
 
+
 ``` helm install [RELEASE_NAME] ingress-nginx/ingress-nginx ```
+
+
 (replace your RELEASE_NAME)
 ( In the background there will create some jobs running in pod. Wait untill its done. Also you can check ``` kubectl describe pod pod-name ``` to see whats it doing. )
 After successful, a controller pod will run automatically.
