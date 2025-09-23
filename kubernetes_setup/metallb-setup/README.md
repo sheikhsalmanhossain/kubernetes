@@ -11,6 +11,7 @@ Thats why we need METALLB.
 ## Steps 1: Enable strict ARP mode :
 
 ``` kubectl edit configmap -n kube-system kube-proxy ```
+
 ( we edit configmap -n=namespace, kube-system=namespace-name, kube-proxy=configmap-name )
 
 ```
