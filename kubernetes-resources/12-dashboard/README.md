@@ -2,7 +2,7 @@
 kubectx is a command-line utility that makes it easier to switch between multiple Kubernetes clusters.
 
 ### Install kubectx :
-``` sudo snap install kubectx --classic
+``` sudo snap install kubectx --classic ```
 ### If you want to move one cluster to another:
 ``` kubectx <cluster-name> ```
 ### You can check all the available Kubernetes clusters in your kubeconfig :
@@ -10,11 +10,12 @@ kubectx is a command-line utility that makes it easier to switch between multipl
 --------------------------------------------------------------------
 ### kubens :
 kubens helps you switch between namespaces inside a cluster.
+
 ### if you want to move one namespace to another inside a cluster :
 ``` kubens <namespace-name> ```
 ### check namespace list :
-`` kubens ```
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+``` kubens ```
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Dashboard :
 
@@ -22,7 +23,7 @@ Reference : https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-d
 
 ## Installing kubernetes dahsboard :
 
-```
+
 #### Add kubernetes-dashboard repository: 
 ``` helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/ ```
 #### Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart:
