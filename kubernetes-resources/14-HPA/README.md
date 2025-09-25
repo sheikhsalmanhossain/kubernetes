@@ -200,6 +200,7 @@ Now we can see "hpa" terminal showing load increasing % . And in "pods" terminal
 
 If we go "kube-system" namespace "kube-controller" pods log we can see that pods are scaling.
 if we decribe hpa we can see info also.
+
 -----------------------------------------------------------------------------
 Now we remove our load.yaml to scale down pods.
 ### Delete load generator pod
