@@ -6,13 +6,13 @@ RBAC= Role Based Access Control
 
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/7ac328fcc037361b9bd976785f10cb3897cf9e1d/kubernetes-resources/15-RBAC/rbac-role.jpg)
 
-### Role:
+### 1) Role:
  A Role is a set of permissions (rules).
 
-### RoleBinding:
+### 2) RoleBinding:
  RoleBinding connects (binds) those permissions to a user.
 
-### User:
+### 3) User:
  A User is the subject that actually receives the permissions
 
 Role is a namespace based resource. It works inside namespace. We create role inside a namespace. Role provide permission in namespace. Rolebinding create mapping between user and role. Rolebinding is also a namespace based resource.
@@ -27,11 +27,11 @@ Cluster-role is a cluster based resource.It works inside cluster.We create clust
 
 
 
-### ClusterRole:
+### 1) ClusterRole:
  A ClusterRole is a set of permissions (rules).
 
-### ClusterRoleBinding:
+### 2) ClusterRoleBinding:
  A ClusterRoleBinding links a ClusterRole to a User
 
-### User:
+### 3) User:
  A User is the subject that actually receives the permissions
