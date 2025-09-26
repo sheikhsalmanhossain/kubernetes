@@ -37,28 +37,5 @@ Cluster-role is a cluster based resource.It works inside cluster.We create clust
 
 ### 3) User:
  A User is the subject that actually receives the permissions
-
-
-
- # Namespace-scoped RBAC:
-
-## Creating user :
-
-Reference: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
-
-[In vscode and terminal in same location]
-
-### steps:
-#### generate certificate file :
-
-- create private key and certificate signing request file:
- ``` openssl genrsa -out newuser.key 2048 ```
-
-(Here username is "newuser". In vscode we see that a key is generated.)
-
-
-(Now, we request for certificate signing)
- ``` openssl req -new -key newuser.key -out newuser.csr -subj "/CN=newuser" ```
-(now we see that newuser.csr file generated)
-
+ 
 
