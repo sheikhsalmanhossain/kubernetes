@@ -60,7 +60,7 @@ spec:
 - Copy the output and replace in "<csr _______ data>"
 
 #### Apply the yaml file :
-``` kubectl apply -f csr.yaml ``
+``` kubectl apply -f csr.yaml ```
 
 #### Check csr(Certificate Signing Request) :
 
