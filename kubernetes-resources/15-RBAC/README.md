@@ -18,6 +18,8 @@ RBAC= Role Based Access Control
 Role is a namespace based resource. It works inside namespace. We create role inside a namespace. Role provide permission in namespace. Rolebinding create mapping between user and role. Rolebinding is also a namespace based resource.
 
 
+--------------------------------------------------------------------------------
+
 # Cluster-scoped RBAC :
 
 ![Image Alt](https://github.com/sheikhsalmanhossain/kubernetes/blob/7ac328fcc037361b9bd976785f10cb3897cf9e1d/kubernetes-resources/15-RBAC/rbac-cluster-role.jpg)
