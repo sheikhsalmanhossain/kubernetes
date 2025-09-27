@@ -74,7 +74,7 @@ we can see condition is pending. Now we have to approve it.
 #### Approve the CertificateSigningRequest :
 ``` kubectl certificate approve csr-name ```
 
-Now if we check ``` kubectl get csr `` . We see that csr approved.
+Now if we check ``` kubectl get csr ``` . We see that csr approved.
 
 #### Get the certificate :
 ``` kubectl get csr newuser -o jsonpath='{.status.certificate}'| base64 -d > newuser.crt ```
