@@ -191,5 +191,86 @@ Cluster-role is a cluster based resource.It works inside cluster.We create clust
 
 ### 3) User:
  A User is the subject that actually receives the permissions
- 
 
+
+ # Cluster-scoped RBAC :
+
+
+####Check users list:
+``` kubectx ```
+
+### Go to admin user :
+``` kubectx <username> ```
+
+### Check pods :
+``` kubectl get pod -A ```
+
+### Check service :
+``` kubectl get svc -A ```
+
+### Creating cluster-role and cluster-role-binding using manifest file :
+#### cr-crb.yaml :
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: newuser
+rules:
+
+  #### Full access to Pods
+  - apiGroups: [""]
+    resources: ["pods"]   #### work in pods
+    verbs: ["*"]       #### can do all task in pod
+```
+### Apply yaml file :
+``` kubectl apply -f cr-crb.yaml ```
+
+### check cluster role :
+``` kubectl get clusterroles -A ```
+### Describe cluster-role :
+``` kubectl describe clusterrole <clusterrole-name> ```
+
+### Create cluster-role with cluster-role-binding:
+
+#### cr-crb.yaml :
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole                            #### creating cluster-role
+metadata:
+  name: newuser
+rules:
+
+  # Full access to Pods
+  - apiGroups: [""]
+    resources: ["pods"]    #### work in pods
+    verbs: ["*"]           #### can do all task in pod
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding                      #### creating cluster-role-binding
+metadata:
+  name: newusercrb
+subjects:
+  - kind: User                               #### refering a user
+    name: newuser                            #### referring "newuser" from certificate name
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: newuser                              #### cluster-role name
+  apiGroup: rbac.authorization.k8s.io
+```
+
+### Apply yaml file :
+``` kubectl apply -f cr-crb.yaml ```
+### Check cluster-role-binding :
+``` kubectl get clusterrolebindings ```
+#### Describe cluster-role-binding :
+``` kubectl describe clusterrolebinding <binding-name> ```
+
+### Shift to "newuser" account :
+``` kubectx newuser ```
+
+### Check pod :
+``` kubectl get pod -A ```
+### Check service:
+``` kubectl get svc ``` (we cant see any service, because this user permission only on pods)
