@@ -94,6 +94,7 @@ User created...
 - we get an output inside vscode "current-context.yaml" file
 - This is the credential for new user.
 - paste yaml file in this url and share it (https://www.toptal.com/developers/hastebin)
+- (user will add this yaml file in ``` sudo vim ~/.kube/config ``` )
 ---------------------------------------------------------------------------------
 
 ## Create Role :
