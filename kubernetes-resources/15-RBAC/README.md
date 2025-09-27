@@ -116,6 +116,7 @@ User created...
 ``` kubectl describe role role-name ```
 
 Our role is created
+
 -------------------------------------------------------------------------------------------
 ## Create RoleBinding :
 
@@ -130,6 +131,7 @@ Our role is created
 ``` kubectl describe rolebinding rolebinding-name ```
 
 Our rolebinding is created.
+
 -------------------------------------------------------------------------
 
 
