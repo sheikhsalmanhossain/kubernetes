@@ -84,6 +84,16 @@ Now if we check ``` kubectl get csr `` . We see that csr approved.
 Now we get a file newuser.crt in vscode.
 
 User created...
+
+
+### How we send this other one to access as a user:
+- kubectx newuser
+- Generate the clean config file, for sharing:
+``` kubectl config view --minify --flatten --context=$(kubectl config current-context) > current-context.yaml ```
+
+- we get an output inside vscode "current-context.yaml" file
+- This is the credential for new user.
+- paste yaml file in this url and share it (https://www.toptal.com/developers/hastebin)
 ---------------------------------------------------------------------------------
 
 ## Create Role :
